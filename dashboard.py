@@ -122,27 +122,16 @@ st.pyplot(fig)
 st.subheader('Jam dengan jumlah penyewaan terbanyak dan paling sedikit')
 
 data_jam = main_df.groupby("hr").cnt.sum().sort_values(ascending=False).reset_index()
-main_df.head(15)
 
-fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(32, 8))
- 
-colors = ["#72BCD4", "#D3D3D3", "#D3D3D3", "#D3D3D3", "#D3D3D3"]
- 
-sns.barplot(x="cnt", y="hr", data=data_jam.head(5), palette=colors, ax=ax[0])
-ax[0].set_ylabel(None)
-ax[0].set_xlabel(None)
-ax[0].set_title("Jam dengan penyewaan terbanyak", loc="center", fontsize=15)
-ax[0].tick_params(axis ='y', labelsize=12)
- 
-sns.barplot(x="cnt", y="hr", data=data_jam.sort_values(by="hr", ascending=True).head(5), palette=colors, ax=ax[1])
-ax[1].set_ylabel(None)
-ax[1].set_xlabel(None)
-ax[1].invert_xaxis()
-ax[1].yaxis.set_label_position("right")
-ax[1].yaxis.tick_right()
-ax[1].set_title("Jam dengan penyewaan paling sedikit", loc="center", fontsize=15)
-ax[1].tick_params(axis='y', labelsize=12)
- 
-plt.suptitle("Penyewaan sepeda berdasarkan jam", fontsize=20)
+fig, ax = plt.subplots(figsize=(24, 6))
+colors = ["#FF6347", "#9370DB", "#20B2AA", "#FFD700", "#008080"]
 
+sns.barplot(x="cnt", y="hr", data=data_jam.head(24).sort_values(by="hr"), palette=colors, ax=ax)
+ax.set_ylabel(None)
+ax.set_xlabel(None)
+ax.tick_params(axis='y', labelsize=12)
+
+plt.suptitle("Jumlah Penyewaan sepeda berdasarkan jam", fontsize=20)
+
+plt.show()
 st.pyplot(fig)
